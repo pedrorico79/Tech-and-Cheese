@@ -1,5 +1,5 @@
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 * {
@@ -15,8 +15,8 @@ body {
 }
 
 #hero {
-  background: linear-gradient(rgba(0, 0, 0, 0.6), #1B1A09), 
-              url('../assets/ChatGPT\ Image\ 17\ de\ jun.\ de\ 2025\,\ 12_51_34.png') center/cover no-repeat;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), #1B1A09),
+    url('../assets/ChatGPT\ Image\ 17\ de\ jun.\ de\ 2025\,\ 12_51_34.png') center/cover no-repeat;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -44,7 +44,7 @@ nav a {
 }
 
 nav a:hover {
-    color: #FFD700;
+  color: #FFD700;
 }
 
 h1 {
@@ -72,8 +72,8 @@ h1 {
 }
 
 #conhecer:hover {
-    color: #FFD700;
-    text-shadow: 5px 5px 40px #FFD700;
+  color: #FFD700;
+  text-shadow: 5px 5px 40px #FFD700;
 }
 
 #sobre {
@@ -100,32 +100,32 @@ h2 {
 }
 
 .caixas-solucoes {
-    display: flex;
-    justify-content: center;
-    gap: 55px;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  gap: 55px;
+  flex-wrap: wrap;
 }
 
 .caixa {
-    border: 3px solid #fff;
-    padding: 20px;
-    text-align: center;
-    width: 220px;
-    background-color: #1B1A09;
-    border-radius: 8px;
-    transition: 0.3s ease;
+  border: 3px solid #fff;
+  padding: 20px;
+  text-align: center;
+  width: 220px;
+  background-color: #1B1A09;
+  border-radius: 8px;
+  transition: 0.3s ease;
 }
 
 .caixa:hover {
-    background-color: #2D2B10;
-    box-shadow: 5px 5px 30px #FFD700;
-    transform: scale(1.10);
+  background-color: #2D2B10;
+  box-shadow: 5px 5px 30px #FFD700;
+  transform: scale(1.10);
 }
 
 .caixa p {
-    font-size: 21px;
-    font-weight: bold;
-    color: white;
+  font-size: 21px;
+  font-weight: bold;
+  color: white;
 }
 
 #convite {
@@ -149,9 +149,71 @@ h2 {
   font-size: 25px;
   text-decoration: none;
   transition: 1s;
+  margin-bottom: 80px;
 }
 
 .botao-cadastrar:hover {
+  background-color: #e3b70c;
+  text-shadow: 5px 5px 40px #FFD700;
+}
+
+.mostrarQueijo {
+  img {
+    border: 3px solid #fff;
+    padding: 20px;
+    text-align: center;
+    width: 280px;
+    background-color: #1B1A09;
+    border-radius: 8px;
+    width: 350px;
+    border-radius: 15px;
+  }
+
+  div {
+    margin-top: 50px;
+  }
+}
+
+.mostrarQueijo .pesquisa {
+  margin-top: 50px;
+
+  select {
+    width: 120px;
+    height: 60px;
+    text-align: center;
+    border-radius: 15px;
+    background-color: rgb(187, 187, 187);
+  }
+
+  button {
+    display: inline-block;
+    border-radius: 15px;
+    padding: 20px 40px;
+    background-color: transparent;
+    color: white;
+    font-weight: bold;
+    font-size: 25px;
+    text-decoration: none;
+    transition: 1s;
+  }
+
+
+  button:hover {
     background-color: #e3b70c;
     text-shadow: 5px 5px 40px #FFD700;
+  }
+}
+
+footer{
+  background-color: transparent;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  a{
+    color: white;
+    text-align: center;
+    margin-bottom: 50px;
+    margin-top: 50px;
+  }
 }
