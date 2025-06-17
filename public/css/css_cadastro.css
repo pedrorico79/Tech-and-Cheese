@@ -28,7 +28,8 @@ body {
 
 .body-cadastro {
     height: 100vh;
-    background-image: url('../assets/ChatGPT\ Image\ 17\ de\ jun.\ de\ 2025\,\ 13_01_21.png');
+    background: linear-gradient(rgba(0, 0, 0, 0.6), #1B1A09), 
+    url('../assets/imgs/queijada.jpg') center/cover no-repeat;
     background-size: cover;
     background-position: center;
     display: flex;

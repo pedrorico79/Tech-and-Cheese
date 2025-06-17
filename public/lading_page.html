@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,37 +8,42 @@
   <script src="https://unpkg.com/phosphor-icons"></script>
   <title>Tech'n Cheese</title>
 </head>
+
 <body>
 
   <section id="hero">
     <nav>
-      <a href="login.html">Login</a> | 
-      <a href="cadastro_empresa.html">Cadastrar Empresa</a> |
-      <a href="cadastro_usuario.html">Cadastrar Usuário</a>
+      <a href="login.html">Login</a> |
+      <a href="cadastro_empresa.html">Cadastrar</a>
     </nav>
 
     <h1>Tech'n Cheese</h1>
-    <p id="apresentacao">Controle inteligente de temperatura e umidade para maturação perfeita dos seus queijos com a <span class="amarelo">Tech'n Cheese</span>.</p>
-    <a href="#sobre" id="conhecer">Conheça mais sobre nós ↓</a>
-  </section>
+    <p id="apresentacao">Controle inteligente de temperatura e umidade para maturação perfeita dos seus queijos com a
+      <span class="amarelo">Tech'n Cheese</span>.
+    </p>
 
-  <section class="mostrarQueijo">
-    <section class="pesquisa">
-      <select name="queijo" id="queijo">
-        <option value="#">Escolha o queijo</option>
-        <option value="Beaufort">Beaufort</option>
-        <option value="Morbier">Morbier</option>
-        <option value="Raclette">Raclette</option>
-      </select>
-      <button onclick="buscarQueijo()">Buscar</button>
+    <section class="mostrarQueijo">
+      <section class="pesquisa">
+        <select name="queijo" id="queijo">
+          <option value="#">Escolha o queijo</option>
+          <option value="Beaufort">Beaufort</option>
+          <option value="Morbier">Morbier</option>
+          <option value="Raclette">Raclette</option>
+        </select>
+        <button onclick="buscarQueijo()">Buscar</button>
+      </section>
+      <div id="imagem_queijo"></div>
     </section>
-    <div id="imagem_queijo"></div>
+
+    <a href="#sobre" id="conhecer">Conheça mais sobre nós ↓</a>
   </section>
 
   <section id="sobre">
     <h2>Quem somos</h2>
     <p id="descricao">
-      A <span class="amarelo">Tech'n Cheese</span> nasceu para trazer inovação às queijarias. Oferecemos tecnologia de monitoramento para garantir a qualidade na maturação dos seus queijos, mantendo a temperatura e a umidade no ponto certo.
+      A <span class="amarelo">Tech'n Cheese</span> nasceu para trazer inovação às queijarias. Oferecemos tecnologia de
+      monitoramento para garantir a qualidade na maturação dos seus queijos, mantendo a temperatura e a umidade no ponto
+      certo.
     </p>
   </section>
 
@@ -62,10 +68,15 @@
   <section id="convite">
     <h2>Faça parte</h2>
     <p id="texto-convite">
-      Cadastre-se na <span class="preto">Tech'n Cheese</span> e tenha o controle total da sua sala de maturação. Seus queijos, no ponto certo, sempre!
+      Cadastre-se na <span class="amarelo">Tech'n Cheese</span> e tenha o controle total da sua sala de maturação. Seus
+      queijos, no ponto certo, sempre!
     </p>
-    <a href="cadastro_empresa.html" class="botao-cadastrar">Cadastrar-se</a>
+    <a href="cadastro.html" class="botao-cadastrar">Cadastrar-se</a>
   </section>
+
+  <footer>
+    <a href="https://atendimentominetech.atlassian.net/servicedesk/customer/portal/67" id="conhecer" target="_blank">Fale Conosco</a>
+  </footer>
 
 </body>
 

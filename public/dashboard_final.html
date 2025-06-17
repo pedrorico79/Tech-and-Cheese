@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Tech'n Cheese</title>
+    <link rel="stylesheet" href="css/style_dashboard.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body onload="carregarDados()">
+
+    <header id="cabecalho">
+        <h2 id="logo">Tech'n Cheese</h2>
+        <h3>Monitoramento de Queijo</h3>    
+        <span id="buguer" class="material-symbols-outlined" onclick="botao()">menu</span>
+        <menu id="opcao">
+            <ul>
+                <li><a href="lading_page.html">Sair</a></li>
+            </ul>
+        </menu>
+    </header>
+
+    <main class="container">
+        <section class="kpis">
+            <div class="status_sistema">
+                <h3>Status Da Sala</h3>
+                <p id="setores_explosao">Normal</p>
+            </div>
+        </section>
+
+        <section class="grafico-principal">
+            <h2>Visão em tempo real da temperatura da sala</h2>
+            <div class="grafico-container">
+                <canvas id="grafico_geral"></canvas>
+            </div>
+        </section>
+    </main>
+
+    <div id="container-avisos-popup"></div>
+
+    <script src="js/dashboard.js"></script>
+    <script>
+        function botao() {
+            const opcao = document.getElementById('opcao');
+            opcao.style.display = (opcao.style.display === 'block') ? 'none' : 'block';
+        }
+
+        document.addEventListener('click', function (event) {
+            const opcao = document.getElementById('opcao');
+            const buguer = document.getElementById('buguer');
+            if (!opcao.contains(event.target) && !buguer.contains(event.target)) {
+                opcao.style.display = 'none';
+            }
+        });
+    </script>
+
+</body>
+
+</html>
