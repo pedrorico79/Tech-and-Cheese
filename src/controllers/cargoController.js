@@ -1,4 +1,3 @@
-
 var cargoModel = require("../models/cargoModel");
 
 function buscar(_, res){

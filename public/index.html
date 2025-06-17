@@ -1,82 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>AquaTech | Página Inicial</title>
-
-    <script src="./js/sessao.js"></script>
-
-    <link rel="stylesheet" href="./css/estilo.css">
-    <link rel="icon" href="./assets/icon/favicon2.ico">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/lading_page.css" />
+  <script src="https://unpkg.com/phosphor-icons"></script>
+  <title>Tech'n Cheese</title>
 </head>
-
 <body>
-    <div class="header">
-      <div class="container">
-        <h1 class="titulo">AquaTech</h1>
-        <ul class="navbar">
-          <li class="agora">
-            <a href="#">Inicial</a>
-          </li>
-          <li>
-            <a href="simulador.html">Simulador</a>
-          </li>
-          <li>|</li>
-          <li>
-            <a href="login.html">Login</a>
-          </li>
-          <li>
-            <a href="cadastro.html">Cadastro</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  
-    <div class="banner">
-      <div class="container">
-        <p>Preservando <span>hoje</span> para existirem <span>amanhã</span>.</p>
-      </div>
-    </div>
-  
-    <div class="social">
-      <div class="container">
-        <div class="boxes">
-          <div class="box">
-            <img src="assets/imgs/planet-earth_color.png">
-            <h4>Missão</h4>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et, quas cupiditate asperiores provident magnam
-              vitae illum iusto fugiat atque deleniti nulla sed iure suscipit, laborum, aliquid accusantium cum dicta
-              minima.</p>
-          </div>
-          <div class="box">
-            <img src="assets/imgs/lightbulb_color.png">
-            <h4>Visão</h4>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et, quas cupiditate asperiores provident magnam
-              vitae illum iusto fugiat atque deleniti nulla sed iure suscipit, laborum, aliquid accusantium cum dicta
-              minima.</p>
-          </div>
-          <div class="box">
-            <img src="assets/imgs/growth_color.png">
-            <h4>Valores</h4>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et, quas cupiditate asperiores provident magnam
-              vitae illum iusto fugiat atque deleniti nulla sed iure suscipit, laborum, aliquid accusantium cum dicta
-              minima.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  
-    <div class="footer">
-      <div class="container">
-        <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023</h4>
-        <span class="version">v1.0.0</span>
-      </div>
-    </div>
-  </body>
 
+  <section id="hero">
+    <nav>
+      <a href="login.html">Login</a> | 
+      <a href="cadastro_empresa.html">Cadastrar Empresa</a> |
+      <a href="cadastro_usuario.html">Cadastrar Usuário</a>
+    </nav>
+
+    <h1>Tech'n Cheese</h1>
+    <p id="apresentacao">Controle inteligente de temperatura e umidade para maturação perfeita dos seus queijos com a <span class="amarelo">Tech'n Cheese</span>.</p>
+    <a href="#sobre" id="conhecer">Conheça mais sobre nós ↓</a>
+  </section>
+
+  <section id="sobre">
+    <h2>Quem somos</h2>
+    <p id="descricao">
+      A <span class="amarelo">Tech'n Cheese</span> nasceu para trazer inovação às queijarias. Oferecemos tecnologia de monitoramento para garantir a qualidade na maturação dos seus queijos, mantendo a temperatura e a umidade no ponto certo.
+    </p>
+  </section>
+
+  <section id="solucoes">
+    <h2>Nossas soluções</h2>
+    <div class="caixas-solucoes">
+      <div class="caixa">
+        <i class="ph ph-thermometer" style="font-size: 60px;"></i>
+        <p>Controle de Temperatura</p>
+      </div>
+      <div class="caixa">
+        <i class="ph ph-drop" style="font-size: 60px;"></i>
+        <p>Controle de Umidade</p>
+      </div>
+      <div class="caixa">
+        <i class="ph ph-chart-line" style="font-size: 60px;"></i>
+        <p>Dashboard em Tempo Real</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="convite">
+    <h2>Faça parte</h2>
+    <p id="texto-convite">
+      Cadastre-se na <span class="preto">Tech'n Cheese</span> e tenha o controle total da sua sala de maturação. Seus queijos, no ponto certo, sempre!
+    </p>
+    <a href="cadastro_empresa.html" class="botao-cadastrar">Cadastrar-se</a>
+  </section>
+
+</body>
 </html>

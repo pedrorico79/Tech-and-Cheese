@@ -197,7 +197,7 @@
                     .then(function (resposta) {
                         if (resposta.ok) {
                             resposta.json().then(json => {
-                                sessionStorage.ID_MINERADORA = json.IdMineradora;
+                                sessionStorage.ID_MINERADORA = json.id;
                                 cadastrarEndereco()
                             });
                         } else {

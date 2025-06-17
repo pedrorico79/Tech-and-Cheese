@@ -1,5 +1,5 @@
-create database techcheese;
-use techcheese;
+create database techandcheese;
+use techandcheese;
 
 create table estado(
 		id int not null auto_increment,

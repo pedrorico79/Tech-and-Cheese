@@ -1,157 +1,193 @@
-html {
-    scroll-behavior: smooth;
-}
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Arial', sans-serif;
 }
 
 body {
-  background: #1B1A09;
-  color: white;
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  color: #333;
 }
 
+/* Hero Section */
 #hero {
-  background: linear-gradient(rgba(0, 0, 0, 0.6), #1B1A09), 
-              url('../assets/ChatGPT\ Image\ 17\ de\ jun.\ de\ 2025\,\ 12_51_34.png') center/cover no-repeat;
-  min-height: 100vh;
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  color: white;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  padding: 20px;
+  align-items: center;
   text-align: center;
+  position: relative;
 }
 
-#hero nav {
+nav {
   position: absolute;
-  top: 20px;
-  right: 20px;
-  border-radius: 10px;
-  font-size: 27px;
-  padding: 10px 15px;
+  top: 30px;
+  right: 30px;
+  font-size: 16px;
 }
 
 nav a {
+  font-size: 20px;
   color: white;
   text-decoration: none;
-  font-weight: bold;
-  margin: 0 8px;
-  transition: 1s;
+  margin: 0 10px;
+  transition: color 0.3s ease;
 }
 
 nav a:hover {
-    color: #FFD700;
+  color: #f1c40f;
 }
 
-h1 {
-  font-size: 100px;
-  margin-bottom: 10px;
+#hero h1 {
+  font-size: 4rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
 #apresentacao {
-  font-size: 28px;
-  max-width: 700px;
-  margin: 10px auto;
-  font-weight: lighter;
+  font-size: 1.3rem;
+  max-width: 600px;
+  margin-bottom: 40px;
+  line-height: 1.8;
 }
 
 .amarelo {
-  color: #FFD700;
+  color: #f1c40f;
+  font-weight: bold;
+}
+
+.preto{
+  color: black;
+  font-weight: bold;
 }
 
 #conhecer {
-  font-size: 30px;
-  font-weight: bold;
-  margin-top: 30px;
   color: white;
-  transition: 1s;
+  text-decoration: none;
+  font-size: 1.1rem;
+  border: 2px solid #f1c40f;
+  padding: 12px 25px;
+  border-radius: 25px;
+  transition: all 0.3s ease;
 }
 
 #conhecer:hover {
-    color: #FFD700;
-    text-shadow: 5px 5px 40px #FFD700;
+  background-color: #f1c40f;
+  color: #2c3e50;
 }
 
+/* Sobre Section */
 #sobre {
-  padding: 10px;
+  padding: 80px 50px;
+  background-color: #ecf0f1;
   text-align: center;
-  max-width: 800px;
-  margin: auto;
 }
 
-h2 {
-  font-size: 60px;
-  font-weight: lighter;
-  margin-bottom: 20px;
+#sobre h2 {
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-bottom: 30px;
 }
 
 #descricao {
-  font-size: 26px;
-  margin-top: 10px;
+  font-size: 1.2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  color: #555;
+  line-height: 1.8;
 }
 
+/* Soluções Section */
 #solucoes {
-  padding: 60px 20px;
+  padding: 80px 50px;
+  background-color: white;
   text-align: center;
+}
+
+#solucoes h2 {
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-bottom: 50px;
 }
 
 .caixas-solucoes {
-    display: flex;
-    justify-content: center;
-    gap: 55px;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  margin-top: 40px;
 }
 
 .caixa {
-    border: 3px solid #fff;
-    padding: 20px;
-    text-align: center;
-    width: 220px;
-    background-color: #1B1A09;
-    border-radius: 8px;
-    transition: 0.3s ease;
+  background-color: #f8f9fa;
+  padding: 40px 30px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  min-width: 200px;
 }
 
 .caixa:hover {
-    background-color: #2D2B10;
-    box-shadow: 5px 5px 30px #FFD700;
-    transform: scale(1.10);
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.caixa i {
+  color: #f1c40f;
+  margin-bottom: 20px;
 }
 
 .caixa p {
-    font-size: 21px;
-    font-weight: bold;
-    color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2c3e50;
 }
 
+/* Convite Section */
 #convite {
+  padding: 80px 50px;
+  background: linear-gradient(135deg, #f1c40f 0%, #f39c12 100%);
   text-align: center;
-  max-width: 800px;
-  margin: auto;
+  color: white;
+}
+
+#convite h2 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
 }
 
 #texto-convite {
-  font-size: 24px;
-  margin-bottom: 30px;
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin: 0 auto 40px;
+  line-height: 1.8;
 }
 
 .botao-cadastrar {
   display: inline-block;
-  border-radius: 15px;
-  padding: 20px 40px;
-  background-color: #c7a008;
+  background-color: #2c3e50;
   color: white;
-  font-weight: bold;
-  font-size: 25px;
   text-decoration: none;
-  transition: 1s;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 15px 40px;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
 .botao-cadastrar:hover {
-    background-color: #e3b70c;
-    text-shadow: 5px 5px 40px #FFD700;
+  background-color: #34495e;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
 }

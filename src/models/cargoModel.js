@@ -1,25 +1,13 @@
 
-var cargoModel = require("../models/cargoModel");
+var database = require("../database/config")
 
-function buscar(_, res){
-    cargoModel.buscar()
-        .then(function (resultado) {
-            if (resultado.length > 0) {
-                const Nome = resultado.map(registro => registro.Nome);
-                const Id = resultado.map(registro => registro.IdCargo);
-
-                res.json({
-                    nome: Nome,
-                    id: Id
-                });
-            } else {
-                res.status(204).send("Nenhum resultado encontrado!");
-            }
-        })
-        .catch(function (erro) {
-            console.log(erro);
-            res.status(500).json(erro.sqlMessage);
-        });
+function buscar() {
+    var instrucaoSql =
+    `
+    select nome as Nome, id as IdCargo from cargo;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
 }
 
 module.exports = {
