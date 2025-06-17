@@ -1,159 +1,84 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>AquaTech | Login</title>
-
-    <script src="./js/sessao.js"></script>
-
-    <link rel="stylesheet" href="./css/estilo.css">
-    <link rel="icon" href="./assets/icon/favicon2.ico">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="css/style_login.css">
+    <title>Login</title>
 </head>
 
-<body>
-
-    <!--Header-->
-
-    <div class="header">
-        <div class="container">
-            <h1 class="titulo">AquaTech</h1>
-            <ul class="navbar">
-                <li>
-                    <a href="index.html">Inicial</a>
-                </li>
-                <li>
-                    <a href="simulador.html">Simulador</a>
-                </li>
-                <li>|</li>
-                <li class="agora">
-                    <a href="#">Login</a>
-                </li>
-                <li>
-                    <a href="cadastro.html">Cadastro</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-
-    <div class="login">
-        <div class="alerta_erro">
-            <div class="card_erro" id="cardErro">
-                <span id="mensagem_erro"></span>
-            </div>
-        </div>
-        <div class="container">
-            <div class="card card-login">
-                <h2>Olá de volta!</h2>
-                <div class="formulario">
-                    <div class="campo">
-                        <span>E-mail:</span>
-                        <input id="email_input" type="text" placeholder="Login">
-                    </div>
-                    <div class="campo">
-                        <span>Senha:</span>
-                        <input id="senha_input" type="password" placeholder="******">
-                    </div>
-                    <button class="botao" onclick="entrar()">Entrar</button>
+<body class="body-login">
+    <div class="container-login">
+        <div class="card-login">
+            <h2>LOGIN | Tech'n Cheese</h2>
+            <div class="form-login">
+                <div class="usuario-login">
+                    <div class="icone-usuario"></div>
+                    <input type="text" id="ipt_emailFuncionario" placeholder="E-mail"><br>
                 </div>
-
-                <div id="div_aguardar" class="loading-div">
-                    <img src="./assets/circle-loading.gif" id="loading-gif">
+                <div class="senha-login">
+                    <div class="icone-senha"></div>
+                    <input type="password" id="ipt_senhaLogin" placeholder="Senha"><br>
                 </div>
-
-                <div id="div_erros_login"></div>
             </div>
+            <button onclick="login()" class="btn-login">LOGIN</button>
+            <div id="cardErro" style="display: none;">
+                <div id="mensagem_erro" class="mensagem-erro"></div>
+            </div>
+            <div id="cardSucesso" style="display: none;">
+                <div id="mensagem_sucesso" class="mensagem-sucesso"></div>
+            </div>            
         </div>
     </div>
-
-    <!--footer inicio-->
-    <div class="footer">
-        <div class="container">
-            <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023</h4>
-            <span class="version">v1.0.0</span>
-        </div>
-    </div>
-    <!--footer fim-->
-
 </body>
-
-</html>
-
 <script>
+    function login() {
+        var emailVar = ipt_emailFuncionario.value;
+        var senhaVar = ipt_senhaLogin.value;
 
-
-    function entrar() {
-        aguardar();
-
-        var emailVar = email_input.value;
-        var senhaVar = senha_input.value;
-
-        if (emailVar == "" || senhaVar == "") {
-            cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
-            finalizarAguardar();
-            return false;
-        }
-        else {
-            setInterval(sumirMensagem, 5000)
-        }
-
-        console.log("FORM LOGIN: ", emailVar);
-        console.log("FORM SENHA: ", senhaVar);
+        document.getElementById("cardErro").style.display = "none";
+        document.getElementById("cardSucesso").style.display = "none";
 
         fetch("/usuarios/autenticar", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 emailServer: emailVar,
                 senhaServer: senhaVar
             })
-        }).then(function (resposta) {
-            console.log("ESTOU NO THEN DO entrar()!")
-
-            if (resposta.ok) {
-                console.log(resposta);
-
-                resposta.json().then(json => {
-                    console.log(json);
-                    console.log(JSON.stringify(json));
-                    sessionStorage.EMAIL_USUARIO = json.email;
-                    sessionStorage.NOME_USUARIO = json.nome;
-                    sessionStorage.ID_USUARIO = json.id;
-                    sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
-
-                    setTimeout(function () {
-                        window.location = "./dashboard/cards.html";
-                    }, 1000); // apenas para exibir o loading
-
-                });
-
-            } else {
-
-                console.log("Houve um erro ao tentar realizar o login!");
-
-                resposta.text().then(texto => {
-                    console.error(texto);
-                    finalizarAguardar(texto);
-                });
-            }
-
-        }).catch(function (erro) {
-            console.log(erro);
         })
+            .then(function (resposta) {
+                if (resposta.ok) {
+                    resposta.json().then(json => {
+                        sessionStorage.NOME_USUARIO = json.Nome;
+                        sessionStorage.ID_USUARIO = json.IdFuncionario;
 
-        return false;
-    }
+                        document.getElementById("mensagem_sucesso").innerText = "Login realizado com sucesso!";
+                        document.getElementById("cardSucesso").style.display = "block";
 
-    function sumirMensagem() {
-        cardErro.style.display = "none"
+                        setTimeout(() => {
+                            if (senhaVar == '0000') {
+                                window.location = "suporte.html";
+                                
+                            } else {
+                                window.location = "dashboard_final.html";
+                            }
+                        }, 1500);
+                    });
+                } else {
+                    resposta.text().then(texto => {
+                        document.getElementById("mensagem_erro").innerText = "Usuário ou senha inválidos.";
+                        document.getElementById("cardErro").style.display = "block";
+                    });
+                }
+            })
+            .catch(function (erro) {
+                document.getElementById("mensagem_erro").innerText = "Erro ao conectar com o servidor.";
+                document.getElementById("cardErro").style.display = "block";
+            });
     }
 
 </script>
+
+</html>

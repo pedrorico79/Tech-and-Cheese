@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/css_cadastro.css">
+    <title>Cadastro Funcionário</title>
+</head>
+
+<body class="body-cadastro" onload="carregarCargos()">
+    <div class="container-cadastro">
+        <div class="logo-cadastro"></div>
+        <div class="card-cadastro">
+            <h1>CADASTRO | Tech'n Cheese</h1>
+            <div class="form-cadastro">
+                <input type="text" placeholder="Inserir CNPJ da empresa" id="ipt_inserirCnpjEmpresa">
+                <input type="text" placeholder="Nome" id="ipt_nomeFuncionario">
+                <input type="text" placeholder="Sobrenome" id="ipt_sobrenomeFuncionario">
+                <input type="email" placeholder="Email de Contato" id="ipt_email">
+                <input type="text" placeholder="Telefone de Contato" id="ipt_telefone">
+                <select id="slc_cargo"></select>
+                <input type="password" placeholder="Senha" id="ipt_senhaFunc">
+                <input type="password" placeholder="Confirmar Senha" id="ipt_confirmarSenhaFunc">
+            </div>
+            <button class="btn-cadastro" onclick="cadastrarUsuario()">CADASTRAR</button>
+            <div id="cardErro" style="display: none;">
+                <div id="mensagem_erro" class="mensagem-erro"></div>
+            </div>
+            <div id="cardSucesso" style="display: none;">
+                <div id="mensagem_sucesso" class="mensagem-sucesso"></div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+
+    var cargos = []
+
+    function carregarCargos() {
+        fetch('/cargos/buscar')
+            .then(function (response) {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(function (resposta) {
+                var cargosVetor = [];
+                for (let i = 0; i < resposta.nome.length; i++) {
+                    cargosVetor.push({
+                        nome: resposta.nome[i],
+                        id: resposta.id[i]
+                    });
+                }
+                cargos = cargosVetor;
+                plotarCargos(cargos);
+            })
+            .catch(function (err) {
+                console.error("Erro ao buscar os dados:", err);
+                cardMensagem.style.display = "block";
+                mensagem_erro.innerHTML = "Não foi possível carregar os avatares. Tente novamente mais tarde.";
+            });
+    }
+
+    function plotarCargos(cargos) {
+        var optionsCargos = '<option value="">Selecione um cargo</option>';
+        for (var i = 0; i < cargos.length; i++) {
+            optionsCargos += `<option value="${cargos[i].id}">${cargos[i].nome}</option>`;
+        }
+        document.getElementById("slc_cargo").innerHTML = optionsCargos;
+    }
+
+    function cadastrarUsuario() {
+        var chaveEmpresa = ipt_inserirCnpjEmpresa.value;
+        var nomeFuncionario = ipt_nomeFuncionario.value;
+        var email = ipt_email.value;
+        var telefone = ipt_telefone.value;
+        var senhaFunc = ipt_senhaFunc.value;
+        var confirmarSenhaFunc = ipt_confirmarSenhaFunc.value;
+        var sobrenomeFuncionario = ipt_sobrenomeFuncionario.value;
+        var cargo = slc_cargo.value;
+
+        document.getElementById("cardErro").style.display = "none";
+        document.getElementById("cardSucesso").style.display = "none";
+
+        if (senhaFunc != confirmarSenhaFunc) {
+            alert("Senha confirmada diferente da senha inserida, faça novamente")
+        } else if (chaveEmpresa == '' || nomeFuncionario == '' || email == '' || telefone == '' || senhaFunc == '' || confirmarSenhaFunc == '' || sobrenomeFuncionario == '' || cargo == '#') {
+            alert("Preencha todos os campos")
+        } else if (chaveEmpresa == '') {
+            alert("Esta empresa não está cadastrada")
+        } else if (!email.includes("@")) {
+            alert("Email inválido! Precisa conter @")
+        } else if (telefone.length != 11) {
+            alert("Número de telefone inválido! Insira o DDD também (sem parênteses)")
+        } else {
+            fetch("/empresas/buscarPeloCnpj", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    cnpjServer: chaveEmpresa
+                })
+            })
+                .then(async function (resposta) {
+                    console.log('bbbb', resposta.json)
+                    if (resposta.ok) {
+
+                        var FkEmpresa = await resposta.json()
+                        console.log('aaaaaa', FkEmpresa)
+                        fetch("/usuarios/cadastrar", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({
+                                nomeFuncionarioServer: nomeFuncionario,
+                                sobrenomeFuncionarioServer: sobrenomeFuncionario,
+                                emailServer: email,
+                                telefoneServer: telefone,
+                                senhaFuncServer: senhaFunc,
+                                cargoServer: cargo,
+                                FkEmpresaServer: FkEmpresa.IdMineradora
+                            }),
+                        })
+                            .then(function (resposta) {
+                                console.log("resposta: ", resposta);
+
+                                if (resposta.ok) {
+                                    setTimeout(() => {
+                                        window.location = "login.html";
+                                    }, "2000");
+                                    document.getElementById("mensagem_sucesso").innerText = "Cadastro realizado com sucesso!";
+                                    document.getElementById("cardSucesso").style.display = "block";
+                                } else {
+                                    resposta.text().then(texto => {
+                                        document.getElementById("mensagem_erro").innerText = "Erro ao realizar o cadastro!";
+                                        document.getElementById("cardErro").style.display = "block";
+                                    });
+                                }
+                            })
+                            .catch(function (resposta) {
+                                console.log(`#ERRO: ${resposta}`);
+                            });
+
+                        return false;
+                    }
+                })
+        }
+    }
+</script>
+
+</html>
