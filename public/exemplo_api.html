@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Coloca um queijo ai e vai mostrar a imagem dele</h1>
+    <select name="queijo" id="queijo">
+        <option value="#">Escolha o queijo</option>
+        <option value="Beaufort">Beaufort</option>
+        <option value="Morbier">Morbier</option>
+        <option value="Raclette">Raclette</option>
+    </select>
+    <button onclick="buscarQueijo()">Buscar</button>
+    <div id="resultado"></div>
+    <div id="imagem_queijo"></div>
+</body>
+
+<script>
+async function buscarQueijo(){
+    let queijoDigitado = queijo.value
+
+    let retornoConvertido = await fetch(`https://cheese-api.onrender.com/cheese/${queijoDigitado}`).then((resposta) => resposta.json())
+    /* resultado.innerHTML = `${retornoConvertido.image}` */
+    imagem_queijo.innerHTML = `<img src="${retornoConvertido.image}" alt="">`
+}
+
+
+</script>
+
+</html>
