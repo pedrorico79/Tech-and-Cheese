@@ -1,0 +1,209 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+}
+
+:root {
+    --cor-primaria: rgb(192, 122, 64);
+    --cor-secundaria: rgb(76, 23, 23);
+    --cor-texto-escuro: rgb(43, 27, 14);
+    --cor-texto-claro: white;
+    --cor-dourado: rgb(227, 186, 111);
+    --cor-fundo: #f5f5f5;
+    --sombra: 0 8px 32px rgba(0, 0, 0, 0.1);
+    --sombra-hover: 0 12px 40px rgba(0, 0, 0, 0.15);
+    --transicao: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --gradient-principal: linear-gradient(135deg, var(--cor-primaria), var(--cor-dourado));
+    --gradient-fundo: linear-gradient(135deg, rgba(192, 122, 64, 0.1), rgba(227, 186, 111, 0.05));
+}
+
+.body-cadastro {
+    height: 100vh;
+    background-image: url('../assets/ChatGPT\ Image\ 17\ de\ jun.\ de\ 2025\,\ 13_01_21.png');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+.container-cadastro {
+    width: 100%;
+    max-width: 400px;
+    height: fit-content;
+    max-height: 90vh;
+}
+
+.logo-cadastro::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+}
+
+.card-cadastro {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 2rem 1.5rem;
+    box-shadow: var(--sombra);
+    transition: var(--transicao);
+    position: relative;
+    overflow: hidden;
+}
+
+.card-cadastro h1 {
+    text-align: center;
+    color: var(--cor-texto-escuro);
+    font-size: 1.4rem;
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.card-cadastro h1::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 2px;
+    background: var(--gradient-principal);
+    border-radius: 2px;
+}
+
+.form-cadastro {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form-cadastro input,
+.form-cadastro select {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 2px solid #e1e1e1;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    background: white;
+    color: var(--cor-texto-escuro);
+    transition: var(--transicao);
+}
+
+.form-cadastro input:focus,
+.form-cadastro select:focus {
+    outline: none;
+    border-color: var(--cor-primaria);
+    box-shadow: 0 0 0 3px rgba(192, 122, 64, 0.1);
+}
+
+.form-cadastro input::placeholder {
+    color: #999;
+    font-size: 0.9rem;
+}
+
+.form-cadastro select {
+    cursor: pointer;
+}
+
+.btn-cadastro {
+    width: 100%;
+    padding: 1rem;
+    background: var(--gradient-principal);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transicao);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 1rem;
+}
+
+.btn-cadastro::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: var(--transicao);
+}
+
+.btn-cadastro:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--sombra-hover);
+}
+
+.btn-cadastro:hover::before {
+    left: 100%;
+}
+
+.btn-cadastro:active {
+    transform: translateY(0px);
+}
+
+@keyframes shimmer {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+#cardErro,
+#cardSucesso {
+    margin-top: 20px;
+    padding: 15px 20px;
+    border-radius: 12px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    transition: all 0.3s ease-in-out;
+}
+
+#cardErro {
+    background-color: #ffe5e5;
+    border: 1px solid #ff4d4d;
+    color: #b30000;
+}
+
+#cardSucesso {
+    background-color: #e6ffe6;
+    border: 1px solid #33cc33;
+    color: #267326;
+}
+
+.mensagem-erro::before {
+    content: "⚠️ ";
+    font-size: 20px;
+}
+
+.mensagem-sucesso::before {
+    content: "✅ ";
+    font-size: 20px;
+}

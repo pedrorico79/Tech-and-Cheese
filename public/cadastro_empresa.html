@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/script.js"></script>
+    <link rel="stylesheet" href="css/css_cadastro.css">
+    <script src="./js/sessao.js"></script>
+    <title>Cadastro Empresa</title>
+</head>
+
+<body class="body-cadastro" onload="carregarCidades()">
+    <div class="container-cadastro">
+        <div class="card-cadastro">
+            <h1>Cadastro Empresa</h1>
+            <div class="form-cadastro">
+                <input type="text" id="ipt_cnpj" placeholder="CNPJ">
+                <input type="text" id="ipt_nomeFantasia" placeholder="Nome Fantasia">
+                <input type="text" id="ipt_bairro" placeholder="Bairro">
+                <input type="text" id="ipt_logradouro" placeholder="Logradouro">
+                <input type="number" id="ipt_numero" placeholder="Número">
+                <select type="text" id="slc_cidade"></select>
+                <input type="text" id="ipt_cep" placeholder="CEP">
+            </div>
+            <button onclick="cadastrarEmpresa()" class="btn-cadastro">CRIAR CADASTRO EMPRESA</button><br>
+            <div id="cardErro" style="display: none;">
+                <div id="mensagem_erro" class="mensagem-erro"></div>
+            </div>
+            <div id="cardSucesso" style="display: none;">
+                <div id="mensagem_sucesso" class="mensagem-sucesso"></div>
+            </div>     
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+
+    var cidades = []
+    var cnpjVar = 0
+    var nomeFantasiaVar = ''
+    var logradouroVar = ''
+    var cepVar = 0
+    var cidadeVar = ''
+    var bairroVar = ''
+    var numeroVar = 0
+
+    document.getElementById("cardErro").style.display = "none";
+    document.getElementById("cardSucesso").style.display = "none";
+
+    function carregarCidades() {
+        fetch('/cidades/buscar')
+            .then(function (response) {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(function (resposta) {
+                var cidadeVetor = [];
+                for (let i = 0; i < resposta.nome.length; i++) {
+                    cidadeVetor.push({
+                        nome: resposta.nome[i],
+                        id: resposta.id[i]
+                    });
+                }
+                cidades = cidadeVetor;
+                plotarCidades(cidades);
+            })
+            .catch(function (err) {
+                console.error("Erro ao buscar os dados:", err);
+                mensagem_erro.innerHTML = "Não foi possível carregar os avatares. Tente novamente mais tarde.";
+            });
+    }
+
+    function plotarCidades(cidades) {
+        var optionsCidades = '<option value="">Selecione uma cidade</option>';
+        for (var i = 0; i < cidades.length; i++) {
+            optionsCidades += `<option value="${cidades[i].id}">${cidades[i].nome}</option>`;
+        }
+        document.getElementById("slc_cidade").innerHTML = optionsCidades;
+    }
+
+    function cadastrarEmpresa() {
+        cnpjVar = ipt_cnpj.value;
+        nomeFantasiaVar = ipt_nomeFantasia.value;
+        cidadeVar = slc_cidade.value;
+        cepVar = ipt_cep.value;
+        logradouroVar = ipt_logradouro.value;
+        bairroVar = ipt_bairro.value;
+        numeroVar = Number(ipt_numero.value);
+        var i = 0;
+        var apenasNumeros = true;
+
+
+        if (cnpjVar == '' || nomeFantasiaVar == '' || cidadeVar == '' || cepVar == '' || logradouroVar == '' || bairroVar == '' || numeroVar == '') {
+           
+            mensagem_erro.innerHTML =
+                "Você deve preencher todos os campos";
+           
+
+            finalizarAguardar();
+            return false;
+
+        } else {
+            if (cnpjVar.length !== 14) {
+                cardErro.style.display = "block";
+                mensagem_erro.innerHTML =
+                "O CNPJ deve conter 14 dígitos";
+
+                finalizarAguardar();
+                return false;
+            }
+
+            for (i = 0; i < cnpjVar.length; i++) {
+                if (cnpjVar[i] < '0' || cnpjVar[i] > '9') {
+                    apenasNumeros = false;
+                    break;
+                }
+            }
+
+            if (!apenasNumeros) {
+                cardErro.style.display = "block";
+                mensagem_erro.innerHTML =
+                    "CNPJ deve conter apenas números";
+
+                finalizarAguardar();
+                return false;
+            }
+            else if (nomeFantasiaVar.length < 3) {
+                cardErro.style.display = "block";
+                mensagem_erro.innerHTML =
+                    "Nome fantasia deve ter mais de 2 letras";
+
+                finalizarAguardar();
+                return false;
+            }
+            else if (logradouroVar.length < 3) {
+                cardErro.style.display = "block";
+                mensagem_erro.innerHTML =
+                    "Logradouro deve ter mais de 2 letras";
+
+                finalizarAguardar();
+                return false;
+            }
+            else if (bairroVar.length < 3) {
+                cardErro.style.display = "block";
+                mensagem_erro.innerHTML =
+                    "Bairro deve ter mais de 2 letras";
+
+                finalizarAguardar();
+                return false;
+            }
+            else if (numeroVar <= 0 || numeroVar >= 99999) {
+                cardErro.style.display = "block";
+                mensagem_erro.innerHTML =
+                    "Número muito grande ou negativo não podem ser inseridos";
+
+                finalizarAguardar();
+                return false;
+            }
+            else if (cepVar.length != 8) {
+                cardErro.style.display = "block";
+                mensagem_erro.innerHTML =
+                    "CEP deve conter 8 dígitos";
+
+                finalizarAguardar();
+                return false;
+            }
+            else {
+                cadastrarMineradora()
+            }
+        }
+
+    }
+
+    function cadastrarMineradora() {
+        fetch("/empresas/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                cnpjServer: cnpjVar,
+                nomeFantasiaServer: nomeFantasiaVar
+            }),
+        })
+            .then(function (resposta) {
+                fetch("/empresas/buscarPeloNome", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        nomeFantasiaServer: nomeFantasiaVar,
+                    })
+                })
+                    .then(function (resposta) {
+                        if (resposta.ok) {
+                            resposta.json().then(json => {
+                                sessionStorage.ID_MINERADORA = json.IdMineradora;
+                                cadastrarEndereco()
+                            });
+                        } else {
+                            resposta.text().then(texto => {
+                                document.getElementById("mensagem_erro").innerText = "Usuário ou senha inválidos.";
+                            });
+                        }
+                    })
+                    .catch(function (erro) {
+                        document.getElementById("mensagem_erro").innerText = "Erro ao conectar com o servidor.";
+                        document.getElementById("cardErro").style.display = "block";
+                    });
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+            });
+
+        return false;
+    }
+
+    function cadastrarEndereco() {
+        var fkMineradoraVar = sessionStorage.ID_MINERADORA
+        console.log(fkMineradoraVar)
+        fetch("/enderecos/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                fkMineradoraServer: fkMineradoraVar,
+                cidadeServer: cidadeVar,
+                cepServer: cepVar,
+                logradouroServer: logradouroVar,
+                bairroServer: bairroVar,
+                numeroServer: numeroVar,
+            }),
+        })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+                if (resposta.ok) {
+                    setTimeout(() => {
+                        window.location = "cadastro_usuario.html";
+                    }, "2000");
+                    document.getElementById("mensagem_sucesso").innerText = "Cadastro realizado com sucesso!";
+                    document.getElementById("cardSucesso").style.display = "block";
+                } else {
+                    resposta.text().then(texto => {
+                        document.getElementById("mensagem_erro").innerText = "Erro ao realizar o cadastro!";
+                        document.getElementById("cardErro").style.display = "block";
+                    });
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+                finalizarAguardar();
+            });
+
+        return false;
+    }
+</script>

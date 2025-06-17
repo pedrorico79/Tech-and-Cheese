@@ -1,0 +1,157 @@
+html {
+    scroll-behavior: smooth;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+body {
+  background: #1B1A09;
+  color: white;
+}
+
+#hero {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), #1B1A09), 
+              url('../assets/ChatGPT\ Image\ 17\ de\ jun.\ de\ 2025\,\ 12_51_34.png') center/cover no-repeat;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
+}
+
+#hero nav {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  border-radius: 10px;
+  font-size: 27px;
+  padding: 10px 15px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  margin: 0 8px;
+  transition: 1s;
+}
+
+nav a:hover {
+    color: #FFD700;
+}
+
+h1 {
+  font-size: 100px;
+  margin-bottom: 10px;
+}
+
+#apresentacao {
+  font-size: 28px;
+  max-width: 700px;
+  margin: 10px auto;
+  font-weight: lighter;
+}
+
+.amarelo {
+  color: #FFD700;
+}
+
+#conhecer {
+  font-size: 30px;
+  font-weight: bold;
+  margin-top: 30px;
+  color: white;
+  transition: 1s;
+}
+
+#conhecer:hover {
+    color: #FFD700;
+    text-shadow: 5px 5px 40px #FFD700;
+}
+
+#sobre {
+  padding: 10px;
+  text-align: center;
+  max-width: 800px;
+  margin: auto;
+}
+
+h2 {
+  font-size: 60px;
+  font-weight: lighter;
+  margin-bottom: 20px;
+}
+
+#descricao {
+  font-size: 26px;
+  margin-top: 10px;
+}
+
+#solucoes {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.caixas-solucoes {
+    display: flex;
+    justify-content: center;
+    gap: 55px;
+    flex-wrap: wrap;
+}
+
+.caixa {
+    border: 3px solid #fff;
+    padding: 20px;
+    text-align: center;
+    width: 220px;
+    background-color: #1B1A09;
+    border-radius: 8px;
+    transition: 0.3s ease;
+}
+
+.caixa:hover {
+    background-color: #2D2B10;
+    box-shadow: 5px 5px 30px #FFD700;
+    transform: scale(1.10);
+}
+
+.caixa p {
+    font-size: 21px;
+    font-weight: bold;
+    color: white;
+}
+
+#convite {
+  text-align: center;
+  max-width: 800px;
+  margin: auto;
+}
+
+#texto-convite {
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+
+.botao-cadastrar {
+  display: inline-block;
+  border-radius: 15px;
+  padding: 20px 40px;
+  background-color: #c7a008;
+  color: white;
+  font-weight: bold;
+  font-size: 25px;
+  text-decoration: none;
+  transition: 1s;
+}
+
+.botao-cadastrar:hover {
+    background-color: #e3b70c;
+    text-shadow: 5px 5px 40px #FFD700;
+}
